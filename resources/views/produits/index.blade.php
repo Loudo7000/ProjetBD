@@ -12,7 +12,10 @@
         <div class="box">  
           @if (count($produits))
               @foreach($produits as $produit)
-              <h1>{{$produit->nom}}</h1>
+              <div>
+                <h1>{{$produit->nom}}</h1>
+                {{ $produit->fournisseur->nom }}
+              </div>
               @endforeach @else
             <p>Pas de Film</p>
           @endif    

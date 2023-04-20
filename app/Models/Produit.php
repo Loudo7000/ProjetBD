@@ -17,8 +17,8 @@ class Produit extends Model
         'fournisseur_id'
     ];
 
-    public function fournisseurs()
+    public function fournisseur()
     {
-        return $this->belongsToMany('App\Models\Fournisseurs');
+        return $this->belongsTo('App\Models\Fournisseur');
     }
 }
