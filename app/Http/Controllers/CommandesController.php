@@ -13,7 +13,8 @@ class CommandesController extends Controller
      */
     public function index()
     {
-        //
+        $produits = Film::orderBy('titre', 'asc')->get();
+        return View('produits.index', compact('produits'));
     }
 
     /**

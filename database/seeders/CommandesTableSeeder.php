@@ -15,6 +15,12 @@ class CommandesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('commandes')->insert([
+            [
+                'recuperation' => 'ratperation',
+                'etat' => 'trestresrat',
+                'user_id' => '2',
+            ],
+        ]);
     }
 }
