@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
+use App\Models\Produit;
 
 class ProduitsController extends Controller
 {
@@ -13,7 +18,8 @@ class ProduitsController extends Controller
      */
     public function index()
     {
-        //
+        $produits = Produit::orderBy('nom', 'asc')->get();
+        return View('produits.index', compact('produits'));
     }
 
     /**

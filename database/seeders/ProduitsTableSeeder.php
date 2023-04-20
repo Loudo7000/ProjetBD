@@ -15,6 +15,14 @@ class ProduitsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('produits')->insert([
+            [
+                'nom' => 'ratduit',
+                'caracteristique' => 'prerat',
+                'photo' => 'ya un rat la',
+                'prix' => 300,
+                'fournisseur_id' => '1',
+            ],
+        ]);
     }
 }

@@ -42,7 +42,7 @@
             <a href="http://127.0.0.1:8000/acteur_film/creation">Acteurs Films</a>
           </div>
         </div>
-        <form class="form-0" method="POST" action="{{ route('usagers.logout') }}" >
+        <form class="form-0" method="POST" action="{{ route('users.logout') }}" >
         @csrf
         <input type="submit" value="Se Déconnecter">
         </form>

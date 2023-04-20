@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ProduitsController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/login',
+[UsersController::class, 'showloginform'])->name('login');
+
+Route::post('/login',
+[UsersController::class, 'login'])->name('users.login');
+
+        //Déconnexion
+Route::post('/logout',
+[UsersController::class, 'logout'])->name('users.logout');
+
+Route::get('/produits',
+[ProduitsController::class, 'index'])->name('produits.index');

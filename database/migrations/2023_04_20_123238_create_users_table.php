@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('nom', '100');
             $table->string('prenom', '100');
             $table->string('adresse', '100');
-            $table->string('email', '100');
-            $table->string('droit', '20');
+            $table->string('password', '100');
+            $table->string('email', '100')->unique();
+            $table->remembertoken()->nullable();
             $table->timestamps();
         });
     }

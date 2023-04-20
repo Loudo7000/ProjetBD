@@ -15,6 +15,11 @@ class FournisseursTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('fournisseurs')->insert([
+            [
+                'nom' => 'rat',
+                'adresse' => 'la rat',
+            ],
+        ]);
     }
 }
