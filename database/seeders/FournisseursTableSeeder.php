@@ -17,8 +17,28 @@ class FournisseursTableSeeder extends Seeder
     {
         DB::table('fournisseurs')->insert([
             [
-                'nom' => 'rat',
-                'adresse' => 'la rat',
+                'nom' => 'fournirat',
+                'adresse' => 'la ou il y a des rats',
+            ],
+            [
+                'nom' => 'fournisseur1',
+                'adresse' => 'adresse1',
+            ],
+            [
+                'nom' => 'fournisseur2',
+                'adresse' => 'adresse2',
+            ],
+            [
+                'nom' => 'fournisseur3',
+                'adresse' => 'adresse3',
+            ],
+            [
+                'nom' => 'fournisseur4',
+                'adresse' => 'adresse4',
+            ],
+            [
+                'nom' => 'fournisseur5',
+                'adresse' => 'adresse5',
             ],
         ]);
     }

@@ -16,9 +16,6 @@
 
     <!-- HEADER -->
     <header>
-      <div class="netflixLogo">
-        <a id="logo" href="http://127.0.0.1:8000/"><img src="{{asset('img/ratflix.png')}}" alt="Logo Image"></a>
-      </div>      
       <nav class="main-nav">                
         <a href="http://127.0.0.1:8000/#home">Populaires</a>
         <a href="http://127.0.0.1:8000/#hero">Héro</a>
