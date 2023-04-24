@@ -17,11 +17,18 @@ class ProduitsTableSeeder extends Seeder
     {
         DB::table('produits')->insert([
             [
-                'nom' => 'ratduit',
-                'caracteristique' => 'prerat',
-                'photo' => 'ya un rat la',
+                'nom' => 'Produit1',
+                'caracteristique' => 'caracteristique1',
+                'photo' => 'rat.jpeg',
                 'prix' => 300,
                 'fournisseur_id' => '1',
+            ],
+            [
+                'nom' => 'Produit2',
+                'caracteristique' => 'caracteristique2',
+                'photo' => 'rat.jpeg',
+                'prix' => 3002,
+                'fournisseur_id' => '2',
             ],
         ]);
     }
