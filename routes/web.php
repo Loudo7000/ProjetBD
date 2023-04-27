@@ -38,3 +38,6 @@ Route::get('/produits',
 
 Route::get('/produits/{produit}', 
 [ProduitsController::class, 'show'])->name('produits.show');
+
+Route::get('/produits/{idP}/store', 
+[ProduitsController::class, 'storeCommandeProduit'])->name('produits.storeCommandeProduit');

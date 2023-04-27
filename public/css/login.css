@@ -5,12 +5,11 @@ body {
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    background-image: url(https://bit.ly/2E3scwW);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    background-color: #b3b3b3;
+    background-color: #5f74a3;
     background-blend-mode: multiply;
   }
   

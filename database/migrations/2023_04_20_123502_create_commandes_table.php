@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->id();
-            $table->string('recuperation', '100');
-            $table->string('etat', '20');
+            $table->string('recuperation', '100')->nullable();
+            $table->string('etat', '20')->default('panier');
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });

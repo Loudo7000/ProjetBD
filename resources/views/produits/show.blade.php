@@ -16,6 +16,7 @@
                 <h5>Adresse fournisseur : {{ $produit->fournisseur->adresse }}</h5>
                 <h2>Prix : <span class="text-success">{{ $produit->prix}}$</span></h2>
                 
+                <a class="btn btn-primary" href="{{ route('produits.storeCommandeProduit', [ $produit->id]) }}">Acheter</a>
                 
                 
             </div>

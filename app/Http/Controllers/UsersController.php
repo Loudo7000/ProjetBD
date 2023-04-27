@@ -79,6 +79,8 @@ class UsersController extends Controller
         //
     }
 
+
+
     /**
      * Display the specified resource.
      *
