@@ -22,4 +22,9 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function commandes()
+    {
+        return $this->HasMany('App\Models\Commande');
+    }
 }

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 use App\Models\Produit;
+use App\Models\Commande;
 
 class ProduitsController extends Controller
 {
@@ -39,7 +40,14 @@ class ProduitsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    }
+
+    public function storeCommandeProduit($idP)
+    {
+        $commande = Commande::where('user_id','=', session('id'))->where('etat','=', 'panier')->first();
+
+        return redirect()->route('produits.index');
+
     }
 
     /**

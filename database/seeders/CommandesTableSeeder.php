@@ -19,7 +19,12 @@ class CommandesTableSeeder extends Seeder
             [
                 'recuperation' => 'ratperation',
                 'etat' => 'trestresrat',
-                'user_id' => '2',
+                'user_id' => '1',
+            ],
+            [
+                'recuperation' => '',
+                'etat' => 'panier',
+                'user_id' => '1',
             ],
         ]);
     }

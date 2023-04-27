@@ -9,7 +9,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="{{asset('css\style.css')}}">
   <link rel="icon" type="image/png" href="{{asset('img/RatRouge.png')}}" />
-  <script src="main.js"></script>
 </head>
 <body>
   <div class="wrapper">
@@ -17,28 +16,14 @@
     <!-- HEADER -->
     <header>
       <nav class="main-nav">                
-        <a href="http://127.0.0.1:8000/#home">Populaires</a>
-        <a href="http://127.0.0.1:8000/#hero">Héro</a>
-        <a href="http://127.0.0.1:8000/#anime">Anime</a>     
+        <a href="http://127.0.0.1:8000/#home">Populaires</a>    
       </nav>
 
       <nav class="sub-nav">
-
-      <a href="http://127.0.0.1:8000/films/index">Film index</a>
-      <a href="http://127.0.0.1:8000/acteurs/index">Acteur index</a>
+      <!-- Non connecté -->
       
       @auth
-      <a href="http://127.0.0.1:8000/usagers/index">Usager index</a>
-      
-        <div class="dropdown">
-          <button class="dropbtn">Ajouter</button>
-          <div class="dropdown-content">
-            <a href="http://127.0.0.1:8000/acteurs/creation">Acteurs</a>
-            <a href="http://127.0.0.1:8000/films/creation">Films</a>
-            <a href="http://127.0.0.1:8000/usagers/creation">Usager</a>
-            <a href="http://127.0.0.1:8000/acteur_film/creation">Acteurs Films</a>
-          </div>
-        </div>
+      <!-- connecté -->
         <form class="form-0" method="POST" action="{{ route('users.logout') }}" >
         @csrf
         <input type="submit" value="Se Déconnecter">
@@ -100,8 +85,7 @@
 
     <!-- FOOTER -->
     <footer>
-      <p>&copy 1997-2022 Ratflix, Inc.</p>
-      <p>RatCorporation 2022</p>
+      <p>RatCorporation 2023</p>
     </footer>
   </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
