@@ -6,7 +6,7 @@
     
     <div class="container-fluid">
         <div class="row">
-        <h1 class=" text-center">{{$produit->nom}}</h1>
+        <h1 class=" text-center  text-danger">{{$produit->nom}}</h1>
             <div class="col-xl-4">
                 <img src="{{asset( 'img/produits/' . $produit->photo )}}" class="img-fluid">
             </div>

@@ -31,16 +31,14 @@ class FournisseursTableSeeder extends Seeder
                 Welland, Ontario(ON), L3B 3Z6',
             ],
             [
-                'nom' => 'fournisseur3',
+                'nom' => 'Asus',
                 'adresse' => '3571 Halsey Avenue
                 Toronto, Ontario(ON), M3B 2W6',
             ],
             [
                 'nom' => 'fournisseur4',
                 'adresse' => '3862 St. John Street
-                Denzil, Saskatchewan(SK), S4P 3Y2
-                
-                306-358-5888',
+                Denzil, Saskatchewan(SK), S4P 3Y2',
             ],
             [
                 'nom' => 'fournisseur5',
