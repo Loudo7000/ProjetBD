@@ -21,4 +21,9 @@ class Produit extends Model
     {
         return $this->belongsTo('App\Models\Fournisseur');
     }
+
+    public function commandes()
+    {
+        return $this->belongsToMany('App\Models\Cammande');
+    }
 }

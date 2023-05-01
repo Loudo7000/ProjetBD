@@ -30,6 +30,13 @@ class ProduitsTableSeeder extends Seeder
                 'prix' => 3002,
                 'fournisseur_id' => '2',
             ],
+            [
+                'nom' => 'Govee Ampoule LED',
+                'caracteristique' => 'Govee Ampoule LED avec contrôle par application, ampoules Bluetooth RVB A19 7 W équivalentes à 60 W, synchronisation de la musique, ampoule à intensité variable pour décoration d\'intérieur, minuterie pour mode lever du soleil et coucher de soleil, facile à installerGovee Ampoule LED',
+                'photo' => 'AmpouleRgb.jpg',
+                'prix' => 16.99,
+                'fournisseur_id' => '3',
+            ],
         ]);
     }
 }
