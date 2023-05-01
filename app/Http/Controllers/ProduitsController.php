@@ -44,8 +44,36 @@ class ProduitsController extends Controller
 
     public function storeCommandeProduit($idP)
     {
-        $commande = Commande::where('user_id','=', session('id'))->where('etat','=', 'panier')->first();
+        
+        try{
+            $commande = Commande::where('user_id','=', session('id'))->where('etat','=', 'panier')->first();
 
+            if(!(isset($commande)))
+            {
+                $data = [
+                    'recuperation' => '',
+                    'etat' => 'panier',
+                    'user_id' => session('id'),
+                    ];
+                    Commande::create($data);
+            }
+            $commande = Commande::where('user_id','=', session('id'))->where('etat','=', 'panier')->firstOrFail();
+            $produit = Produit::findOrFail($idP);
+                
+            /*Verifier sur la relation existe*/ 
+            if($commande->produits->contains($produit)){
+                    return redirect()->route('produits.index')->withErrors(['Relation existe!']);
+                }
+                else{
+                    $commande->produits()->attach($produit);
+                }
+            $commande->save();
+            return redirect()->route('produits.index')->with('message',"Relation créé");
+        }
+        catch(\Throwable $e){
+            Log::debug($e);
+            return redirect()->route('produits.index')->withErrors(['Relation invalide']); 
+        }
         return redirect()->route('produits.index');
 
     }

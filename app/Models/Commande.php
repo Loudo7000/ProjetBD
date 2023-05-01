@@ -12,6 +12,7 @@ class Commande extends Model
     protected $fillable= [
         'recuperation',
         'etat',
+        'user_id',
     ];
 
     public function user()
@@ -19,5 +20,9 @@ class Commande extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function produits()
+    {
+        return $this->belongsToMany('App\Models\Produit');
+    }
 
 }
