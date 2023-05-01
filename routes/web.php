@@ -42,8 +42,8 @@ Route::get('/produits/{produit}',
 Route::get('/produits/{idP}/store', 
 [ProduitsController::class, 'storeCommandeProduit'])->name('produits.storeCommandeProduit');
 
-Route::get('/produits/ajout',
+Route::get('/produit/ajout',
 [ProduitsController::class, 'create'])->name('produits.create');
 
-Route::post('/produits/store',
+Route::post('/produits',
 [ProduitsController::class, 'store'])->name('produits.store');
