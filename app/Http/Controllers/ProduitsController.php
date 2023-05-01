@@ -29,7 +29,7 @@ class ProduitsController extends Controller
      */
     public function create()
     {
-        //
+        return View('produits.create');
     }
 
     /**
@@ -40,11 +40,13 @@ class ProduitsController extends Controller
      */
     public function store(Request $request)
     {
+        
     }
 
     public function storeCommandeProduit($idP)
     {
         $commande = Commande::where('user_id','=', session('id'))->where('etat','=', 'panier')->first();
+
 
         return redirect()->route('produits.index');
 
