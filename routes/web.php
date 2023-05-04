@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProduitsController;
+use App\Http\Controllers\FournisseursController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -45,5 +46,19 @@ Route::get('/produits/{idP}/store',
 Route::get('/produit/ajout',
 [ProduitsController::class, 'create'])->name('produits.create');
 
+Route::get('/produit/{id}/modifier',
+[ProduitsController::class, 'edit'])->name('produits.edit');
+
 Route::post('/produits',
 [ProduitsController::class, 'store'])->name('produits.store');
+
+Route::patch('/produits/{id}/modifier',
+[ProduitsController::class, 'update'])->name('produits.update');
+
+
+// Fournisseur
+Route::get('/fournisseurs/ajout',
+[FournisseursController::class, 'create'])->name('fournisseurs.create');
+
+Route::post('/fournisseurs',
+[FournisseursController::class, 'store'])->name('fournisseurs.store');

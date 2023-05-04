@@ -17,6 +17,9 @@
                 <h2>Prix : <span class="text-success">{{ $produit->prix}}$</span></h2>
                 
                 <a class="btn btn-primary" href="{{ route('produits.storeCommandeProduit', [ $produit->id]) }}">Acheter</a>
+                @auth
+                <a href="{{ route('produits.edit', [$produit->id]) }}" class="btn btn-primary">Modifier</a>
+                @endauth
                 
                 
             </div>
