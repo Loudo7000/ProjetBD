@@ -72,13 +72,6 @@ use Illuminate\Support\Facades\Auth;
         Route::post('/produits',
         [ProduitsController::class, 'store'])->name('produits.store')->middleware('auth');
 
-// Commande
-        Route::get('/Panier',
-        [CommandesController::class, 'index'])->name('commandes.index')->middleware('auth');
-
-        Route::get('/Panier/{id}/{recup}/', 
-        [CommandesController::class, 'update'])->name('commandes.update')->middleware('auth');
-
         Route::get('/produit/{id}/modifier',
         [ProduitsController::class, 'edit'])->name('produits.edit');
 
@@ -88,9 +81,18 @@ use Illuminate\Support\Facades\Auth;
         Route::patch('/produits/{id}/modifier',
         [ProduitsController::class, 'update'])->name('produits.update');
 
-        // Fournisseur
+// Commande
+        Route::get('/Panier',
+        [CommandesController::class, 'index'])->name('commandes.index')->middleware('auth');
+
+        Route::get('/Panier/{id}/{recup}/', 
+        [CommandesController::class, 'update'])->name('commandes.update')->middleware('auth');
+
+// Fournisseur
         Route::get('/fournisseurs/ajout',
         [FournisseursController::class, 'create'])->name('fournisseurs.create');
 
         Route::post('/fournisseurs',
         [FournisseursController::class, 'store'])->name('fournisseurs.store');
+
+        
