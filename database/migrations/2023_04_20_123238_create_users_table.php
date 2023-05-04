@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('adresse', '100');
             $table->string('password', '100');
             $table->string('email', '100')->unique();
+            $table->string('avatar', 1000)->nullable();
+            $table->string('droit', '20');
             $table->remembertoken()->nullable();
             $table->timestamps();
         });

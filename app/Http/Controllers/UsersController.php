@@ -18,7 +18,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        $usagers = User::where('droit', 'admin')->get();
+        return View('users.index', compact('usagers'));
     }
 
     public function showloginform()
@@ -30,6 +31,7 @@ class UsersController extends Controller
     {
         $user = User::where('email', $request->email)->first();
         if(isset($user)){
+            Session::put('user', $user);
             Session::put('nom', $user->nom);
             Session::put('id', $user->id);
         }
@@ -65,7 +67,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return View('usagers.create');
     }
 
     /**
@@ -74,9 +76,30 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UsagerRequest $request)
     {
-        //
+        try {
+            $usager = new Usager($request->all());
+
+            $uploadedFile = $request->file('avatar');
+            $nomFichierUnique = str_replace(' ', '_', $usager->email) . '-' . uniqid() . '.' . $uploadedFile->extension(); 
+
+            try {
+            $request->avatar->move(public_path('img/usagers'), $nomFichierUnique);
+            }
+            catch(\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
+                Log::debug($e);
+                Log::error("Erreur lors du téléversement du fichier. ", [$e]);
+            }
+
+            $usager->avatar = $nomFichierUnique;
+            $usager->save();
+        }
+        catch (\Throwable $e) {
+        //Gérer l'erreur
+            Log::debug($e);
+        }
+        return redirect()->route('usagers.index');
     }
 
 
@@ -99,8 +122,9 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {        
+        $usager = Usager::findOrFail($id);
+        return View('usagers.edit', compact('usager'));
     }
 
     /**
@@ -112,7 +136,41 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $usager = Usager::findOrFail($id);
+
+            $usager->nom = $request->nom;
+            $usager->email = $request->email;
+            $usager->password = $request->password;
+
+        
+            $image_path = public_path('img/usagers').'/'.$usager->avatar;
+            
+            if(File::exists($image_path)) {
+                File::delete($image_path);
+            }
+
+            $uploadedFile = $request->file('avatar');
+            $nomFichierUnique = str_replace(' ', '_', $usager->email) . '-' . uniqid() . '.' . $uploadedFile->extension(); 
+
+            try {
+            $request->avatar->move(public_path('img/usagers'), $nomFichierUnique);
+            }
+            catch(\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
+                Log::debug($e);
+                Log::error("Erreur lors du téléversement du fichier. ", [$e]);
+            }
+
+            
+            $usager->avatar = $nomFichierUnique;
+
+            $usager->save();
+            return redirect()->route('usagers.index')->with('message', "Modification de " . $usager->nom . " réussi!");
+        }
+        catch (\Throwable $e) {
+            Log::debug($e);
+            return redirect()->route('usagers.index')->withErrors(['la Modification n\'a pas fonctionné']);
+        }
     }
 
     /**
@@ -123,6 +181,20 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $usager = Usager::findOrFail($id);
+            $image_path = public_path('img/usagers').'/'.$usager->avatar;
+            
+            if(File::exists($image_path)) {
+                File::delete($image_path);
+            }
+
+            $usager->delete();
+            return redirect()->route('users.index')->with('message', "Suppression de " . $usager->nom . " réussi!");
+        }
+        catch (\Throwable $e) {
+            Log::debug($e);
+            return redirect()->route('users.index')->withErrors(['la suppression n\'a pas fonctionné']);
+        }
     }
 }
