@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProduitsController;
+use App\Http\Controllers\FournisseursController;
 use App\Http\Controllers\CommandesController;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,8 +19,8 @@ use Illuminate\Support\Facades\Auth;
 */
 
 // Home
-Route::get('/',
-[ProduitsController::class, 'index'])->name('produits.index');
+        Route::get('/',
+        [ProduitsController::class, 'index'])->name('produits.index');
 
 // User
         Route::get('/login',
@@ -77,3 +78,19 @@ Route::get('/',
 
         Route::get('/Panier/{id}/{recup}/', 
         [CommandesController::class, 'update'])->name('commandes.update')->middleware('auth');
+
+        Route::get('/produit/{id}/modifier',
+        [ProduitsController::class, 'edit'])->name('produits.edit');
+
+        Route::post('/produits',
+        [ProduitsController::class, 'store'])->name('produits.store');
+
+        Route::patch('/produits/{id}/modifier',
+        [ProduitsController::class, 'update'])->name('produits.update');
+
+        // Fournisseur
+        Route::get('/fournisseurs/ajout',
+        [FournisseursController::class, 'create'])->name('fournisseurs.create');
+
+        Route::post('/fournisseurs',
+        [FournisseursController::class, 'store'])->name('fournisseurs.store');

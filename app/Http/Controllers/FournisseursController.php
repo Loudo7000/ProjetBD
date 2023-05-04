@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
+use App\Models\Fournisseur;
 
 class FournisseursController extends Controller
 {
@@ -23,7 +27,7 @@ class FournisseursController extends Controller
      */
     public function create()
     {
-        //
+        return View('fournisseurs.create');
     }
 
     /**
@@ -34,7 +38,18 @@ class FournisseursController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+                $fournisseur = new Fournisseur($request->all());
+                $fournisseur->save();
+                return redirect()->route('produits.index')->with('message', "Ajout du fournisseur " . $fournisseur->nom . " réussi!");
+            }
+        
+            catch (\Throwable $e) {
+                //Gérer l'erreur
+                Log::debug($e);
+            }
+            return redirect()->route('produits.index');
+            
     }
 
     /**
