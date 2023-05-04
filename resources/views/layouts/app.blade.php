@@ -24,9 +24,13 @@
       
       @auth
       <!-- connecté -->
+      <a href="http://127.0.0.1:8000/Panier">Panier</a>
+      @if(Session::get('user')->droit == 'admin')
+      <a href="http://127.0.0.1:8000/usagers/index">Usager index</a>
+      @endif
         <form class="form-0" method="POST" action="{{ route('users.logout') }}" >
-        @csrf
-        <input type="submit" value="Se Déconnecter">
+          @csrf
+          <input type="submit" value="Se Déconnecter">
         </form>
         <a href="#" >{{ Session::get('nom') }}</a>
         @else
