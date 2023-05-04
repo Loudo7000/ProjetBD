@@ -41,7 +41,7 @@
             <label>Fournisseur</label>
             <select class="form-control" name="fournisseur_id">
             @foreach($fournisseurs as $fournisseur)
-                <option value="{{ $fournisseur->id }}" {{ $fournisseur->id == old('fournisseur_id' ? 'selected' : null )}}>{{ $fournisseur->nom }}</option>
+                <option value="{{ $fournisseur->id }}" {{ $fournisseur->id == old('fournisseur_id', $produit->fournisseur_id) ? 'selected' : null }}>{{ $fournisseur->nom }}</option>
             @endforeach
         </select>
         </div>

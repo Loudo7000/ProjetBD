@@ -135,7 +135,29 @@ class ProduitsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try{
+            $produit = Produit::findOrFail($id);
+            $produit->nom = $request->nom;
+            $produit->caracteristique = $request->caracteristique;
+            $produit->prix = $request->prix;
+            
+            if(isset($request->photo))
+            {
+            $image_path = public_path('img/produits').'/'.$produit->photo; File::delete($image_path);
+            $uploadedFile = $request->file('photo');
+            $nomFichierUnique = str_replace(' ', '_', $request->nom) . '-' . uniqid() . '.' . $uploadedFile->extension();
+            $request->photo->move(public_path('img/produits'), $nomFichierUnique);
+            $produit->photo = $nomFichierUnique;
+            }
+
+            $produit->save();
+            return redirect()->route('produits.index')->with('message', "Modification de " . $produit->nom . " réussi!");
+        }
+        catch(\Throwable $e){
+            Log::debug($e);
+            return redirect()->route('produits.index')->withErrors(['La modification n\'a pas fonctionné']); 
+        }
+        return redirect()->route('produits.index');
     }
 
     /**
