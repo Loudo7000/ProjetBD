@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Commande;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 
 class CommandesController extends Controller
 {
@@ -13,7 +18,9 @@ class CommandesController extends Controller
      */
     public function index()
     {
-
+        $commandePaniers = Commande::where('user_id','=',Session::get('id'))->where('etat','=','panier')->first();
+        $commandeEnvoyes = Commande::where('user_id','=',Session::get('id'))->where('etat','=','envoye')->get();
+        return View('commandes.index',compact('commandePaniers','commandeEnvoyes'));
     }
 
     /**
@@ -66,9 +73,17 @@ class CommandesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update( $id, $recup)
     {
-        //
+        try {
+
+            $Commande = Commande::findOrFail($id)->update(['recuperation' => $recup,'etat' => 'envoye']);
+            return redirect()->route('commandes.index')->with('message', "Modification réussi!");
+        }
+        catch (\Throwable $e) {
+            Log::debug($e);
+            return redirect()->route('commandes.index')->withErrors(['la Modification n\'a pas fonctionné']);
+        }
     }
 
     /**
