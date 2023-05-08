@@ -16,7 +16,7 @@
     <!-- HEADER -->
     <header>
       <nav class="main-nav">                
-        <a href="http://127.0.0.1:8000/#home">Populaires</a>    
+        <a href="http://127.0.0.1:8000/#home">Produits</a>    
       </nav>
 
       <nav class="sub-nav">
@@ -26,13 +26,14 @@
       <!-- connecté -->
       <a href="http://127.0.0.1:8000/Panier">Panier</a>
       @if(Session::get('user')->droit == 'admin')
-      <a href="http://127.0.0.1:8000/usagers/index">Usager index</a>
+      <a href="http://127.0.0.1:8000/usagers/index">Admins</a>
+      <a href="http://127.0.0.1:8000/usagers/creation">Ajout de produit</a>
       @endif
         <form class="form-0" method="POST" action="{{ route('users.logout') }}" >
           @csrf
           <input type="submit" value="Se Déconnecter">
         </form>
-        <a href="#" >{{ Session::get('nom') }}</a>
+        <a href="#">{{ Session::get('nom') }}</a>
         @else
         <a href="http://127.0.0.1:8000/login">Se Connecter</a>
         @endauth

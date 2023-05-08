@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UsersController extends Controller
@@ -67,7 +68,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return View('usagers.create');
+        return View('users.create');
     }
 
     /**
@@ -76,30 +77,19 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UsagerRequest $request)
+    public function store(Request $request)
     {
         try {
-            $usager = new Usager($request->all());
-
-            $uploadedFile = $request->file('avatar');
-            $nomFichierUnique = str_replace(' ', '_', $usager->email) . '-' . uniqid() . '.' . $uploadedFile->extension(); 
-
-            try {
-            $request->avatar->move(public_path('img/usagers'), $nomFichierUnique);
-            }
-            catch(\Symfony\Component\HttpFoundation\File\Exception\FileException $e) {
-                Log::debug($e);
-                Log::error("Erreur lors du téléversement du fichier. ", [$e]);
-            }
-
-            $usager->avatar = $nomFichierUnique;
+            $usager = new User($request->all());
+            $usager->password = Hash::make($request->password);
+            $usager->droit = 'client';
             $usager->save();
         }
         catch (\Throwable $e) {
         //Gérer l'erreur
             Log::debug($e);
         }
-        return redirect()->route('usagers.index');
+        return redirect()->route('users.login');
     }
 
 
@@ -123,8 +113,8 @@ class UsersController extends Controller
      */
     public function edit($id)
     {        
-        $usager = Usager::findOrFail($id);
-        return View('usagers.edit', compact('usager'));
+        $usager = User::findOrFail($id);
+        return View('users.edit', compact('usager'));
     }
 
     /**
@@ -137,13 +127,16 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $usager = Usager::findOrFail($id);
+            $usager = User::findOrFail($id);
 
             $usager->nom = $request->nom;
+            $usager->prenom = $request->prenom;
+            $usager->adresse = $request->adresse;
             $usager->email = $request->email;
             $usager->password = $request->password;
 
-        
+            if(isset($request->avatar))
+            {
             $image_path = public_path('img/usagers').'/'.$usager->avatar;
             
             if(File::exists($image_path)) {
@@ -161,15 +154,15 @@ class UsersController extends Controller
                 Log::error("Erreur lors du téléversement du fichier. ", [$e]);
             }
 
-            
             $usager->avatar = $nomFichierUnique;
+            }
 
             $usager->save();
-            return redirect()->route('usagers.index')->with('message', "Modification de " . $usager->nom . " réussi!");
+            return redirect()->route('produits.index')->with('message', "Modification de " . $usager->nom . " " . $usager->nom . " réussi!");
         }
         catch (\Throwable $e) {
             Log::debug($e);
-            return redirect()->route('usagers.index')->withErrors(['la Modification n\'a pas fonctionné']);
+            return redirect()->route('produits.index')->withErrors(['la Modification n\'a pas fonctionné']);
         }
     }
 
