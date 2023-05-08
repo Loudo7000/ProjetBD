@@ -35,25 +35,25 @@ use Illuminate\Support\Facades\Auth;
 
         //afficher
         Route::get('/usagers/index',
-        [UsersController::class, 'index'])->name('users.index')->middleware('auth');
+        [UsersController::class, 'index'])->name('users.index')->middleware('auth', 'admin');
         
                 //ajouter
         Route::get('/usagers/creation',
-        [UsersController::class, 'create'])->name('users.create')->middleware('auth');
+        [UsersController::class, 'create'])->name('users.create');
                 
         Route::post('/usagers', 
-        [UsersController::class, 'store'])->name('users.store')->middleware('auth');
+        [UsersController::class, 'store'])->name('users.store');
         
                 //modifier
         Route::get('/usagers/{id}/modifier/', 
-        [UsersController::class, 'edit'])->name('users.edit')->middleware('auth');
+        [UsersController::class, 'edit'])->name('users.edit')->middleware('auth', 'admin');
         
         Route::patch('/usagers/{id}/modifier/', 
-        [UsersController::class, 'update'])->name('users.update')->middleware('auth');
+        [UsersController::class, 'update'])->name('users.update')->middleware('auth', 'admin');
         
                 //suprimer
         Route::delete('/usagers/{id}', 
-        [UsersController::class, 'destroy'])->name('users.destroy')->middleware('auth');
+        [UsersController::class, 'destroy'])->name('users.destroy')->middleware('auth', 'admin');
 
 
 // Produit
@@ -67,19 +67,19 @@ use Illuminate\Support\Facades\Auth;
         [ProduitsController::class, 'storeCommandeProduit'])->name('produits.storeCommandeProduit')->middleware('auth');
 
         Route::get('/produit/ajout',
-        [ProduitsController::class, 'create'])->name('produits.create')->middleware('auth');
+        [ProduitsController::class, 'create'])->name('produits.create')->middleware('auth', 'admin');
 
         Route::post('/produits',
         [ProduitsController::class, 'store'])->name('produits.store')->middleware('auth');
 
         Route::get('/produit/{id}/modifier',
-        [ProduitsController::class, 'edit'])->name('produits.edit');
+        [ProduitsController::class, 'edit'])->name('produits.edit')->middleware('auth', 'admin');
 
         Route::post('/produits',
         [ProduitsController::class, 'store'])->name('produits.store');
 
         Route::patch('/produits/{id}/modifier',
-        [ProduitsController::class, 'update'])->name('produits.update');
+        [ProduitsController::class, 'update'])->name('produits.update')->middleware('auth', 'admin');
 
 // Commande
         Route::get('/Panier',

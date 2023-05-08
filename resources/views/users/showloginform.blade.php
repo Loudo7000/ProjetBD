@@ -28,7 +28,7 @@
         @endforeach
     @endif
         <button class="login__sign-in" type="submit">Se Connecter</button>
-        <div class="login__secondary-cta"><a class="login__secondary-cta__text" href="#">Se souvenir</a><a class="login__secondary-cta__text login__secondary-cta__text--need-help" href="#">besoin d'aide?</a></div>
+        <div class="login__secondary-cta"><a class="login__secondary-cta__text" href="http://127.0.0.1:8000/usagers/creation">Créer un compte</a><a class="login__secondary-cta__text login__secondary-cta__text--need-help" href="#">besoin d'aide?</a></div>
     </div>
 </form>
 
